@@ -32,7 +32,6 @@ public class Usuario implements Serializable {
     private Set<Comentario> comentario;
 
     @ManyToOne
-    @JoinColumn(name = "funcao_id")
     private Funcao funcao;
 
     

@@ -2,11 +2,9 @@ package com.example.teoloblog.domain.autor;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+import com.example.teoloblog.domain.funcao.Funcao;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,5 +25,4 @@ public class Autor implements Serializable {
     private String nome;
     private String descricao;
     private String imagem;
-    
 }

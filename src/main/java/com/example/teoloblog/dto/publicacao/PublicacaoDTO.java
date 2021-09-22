@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.example.teoloblog.domain.autor.Autor;
-import com.example.teoloblog.domain.etiqueta.Etiqueta;
-import com.example.teoloblog.dto.etiqueta.EtiquetaDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +23,5 @@ public class PublicacaoDTO implements Serializable{
     // fazer correcoes nos tipos
     private String texto;
     private String data;
-    private List<EtiquetaDTO> etiquetas;
     private Autor autor;
 }

@@ -17,14 +17,13 @@ import java.io.Serializable;
 @Entity
 public class EtiquetaPublicacao implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
 
     @ManyToOne
-    @JoinColumn(name = "etiqueta_id")
     private Etiqueta etiqueta;
 
     @ManyToOne
-    @JoinColumn(name = "publicacao_id")
     private Publicacao publicacao;
 
 }
