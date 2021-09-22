@@ -1,12 +1,12 @@
 package com.example.teoloblog.domain.usuario;
 
 import java.io.Serializable;
+import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+import com.example.teoloblog.domain.comentario.Comentario;
+import com.example.teoloblog.domain.funcao.Funcao;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,5 +27,13 @@ public class Usuario implements Serializable {
     private String nome;
     private String username;
     private String password;
+
+    @OneToMany(mappedBy = "usuario")
+    private Set<Comentario> comentario;
+
+    @ManyToOne
+    @JoinColumn(name = "funcao_id")
+    private Funcao funcao;
+
     
 }

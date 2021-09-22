@@ -1,17 +1,17 @@
 package com.example.teoloblog.domain.publicacao;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.example.teoloblog.domain.autor.Autor;
+import com.example.teoloblog.domain.comentario.Comentario;
 import com.example.teoloblog.domain.etiquetapublicacao.EtiquetaPublicacao;
 
 import lombok.AllArgsConstructor;
@@ -37,10 +37,14 @@ public class Publicacao implements Serializable {
     private String texto;
     private String data;
     
-    @OneToMany
-    @JoinColumn
-    private List<EtiquetaPublicacao> etiquetaPublicacaoAgrupamento;
+    @OneToMany(mappedBy = "publicacao")
+    private Set<EtiquetaPublicacao> etiquetaPublicacao;
+
     @ManyToOne
     private Autor autor;
+
+    @OneToMany(mappedBy = "publicacao")
+    private Set<Comentario> comentario;
+
     
 }

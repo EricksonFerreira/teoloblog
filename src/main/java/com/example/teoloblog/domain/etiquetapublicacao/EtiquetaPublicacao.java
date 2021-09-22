@@ -1,21 +1,30 @@
 package com.example.teoloblog.domain.etiquetapublicacao;
-import java.io.Serializable;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import javax.persistence.*;
+
+import com.example.teoloblog.domain.etiqueta.Etiqueta;
+import com.example.teoloblog.domain.publicacao.Publicacao;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 public class EtiquetaPublicacao implements Serializable {
-    private static final long serialVersionUID = 1L;
+    @Id
+    private Integer codigo;
 
-    @EmbeddedId
-    private EtiquetaPublicacaoPK id;
+    @ManyToOne
+    @JoinColumn(name = "etiqueta_id")
+    private Etiqueta etiqueta;
+
+    @ManyToOne
+    @JoinColumn(name = "publicacao_id")
+    private Publicacao publicacao;
+
 }
