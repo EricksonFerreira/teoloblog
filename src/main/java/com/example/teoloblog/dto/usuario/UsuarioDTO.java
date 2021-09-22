@@ -3,6 +3,7 @@ package com.example.teoloblog.dto.usuario;
 import java.io.Serializable;
 
 import com.example.teoloblog.domain.funcao.Funcao;
+import com.example.teoloblog.dto.funcao.FuncaoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,5 @@ public class UsuarioDTO implements Serializable {
     private String nome;
     private String username;
     private String password;
-
-    private Funcao funcao;
+    private FuncaoDTO funcao;
 }

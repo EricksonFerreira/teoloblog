@@ -3,6 +3,7 @@ package com.example.teoloblog.dto.referencia;
 import java.io.Serializable;
 
 import com.example.teoloblog.domain.publicacao.Publicacao;
+import com.example.teoloblog.dto.publicacao.PublicacaoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +20,5 @@ public class ReferenciaDTO implements Serializable{
     private Integer codigo;
     // fazer correcoes nos tipos
     private String texto;
-    private Publicacao publicacao;
+    private PublicacaoDTO publicacao;
 }

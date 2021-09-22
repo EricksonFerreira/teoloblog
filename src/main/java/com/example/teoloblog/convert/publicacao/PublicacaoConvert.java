@@ -3,6 +3,7 @@ package com.example.teoloblog.convert.publicacao;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.teoloblog.convert.autor.AutorConvert;
 import com.example.teoloblog.domain.publicacao.Publicacao;
 import com.example.teoloblog.dto.publicacao.PublicacaoDTO;
 import com.example.teoloblog.dto.publicacao.PublicacaoFormDTO;
@@ -22,7 +23,7 @@ public class PublicacaoConvert {
                                    .titulo(domain.getTitulo())
                                    .texto(domain.getTexto())
                                    .data(domain.getData())
-                                   .autor(domain.getAutor())
+                                   .autor(AutorConvert.autorDomainToDTO(domain.getAutor()))
                                    .build();
     }
 

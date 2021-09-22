@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import com.example.teoloblog.domain.autor.Autor;
 import com.example.teoloblog.domain.publicacao.Publicacao;
+import com.example.teoloblog.dto.autor.AutorDTO;
+import com.example.teoloblog.dto.publicacao.PublicacaoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +23,6 @@ public class ComentarioDTO implements Serializable {
     private Integer codigo;
     private String texto;
     private String data;
-    private Autor autor;
-    private Publicacao publicacao;
+    private AutorDTO autor;
+    private PublicacaoDTO publicacao;
 }

@@ -19,7 +19,7 @@ public class ReferenciaFormDTO implements Serializable{
     // fazer correcoes nos tipos
     private String texto;
     
-    @JsonProperty("publicacao_id")
+//    @JsonProperty("publicacao_id")
     private Integer publicacaoId;
     
 }

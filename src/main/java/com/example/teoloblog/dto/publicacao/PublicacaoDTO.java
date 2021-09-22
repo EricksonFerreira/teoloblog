@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.teoloblog.domain.autor.Autor;
 
+import com.example.teoloblog.dto.autor.AutorDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,5 +24,5 @@ public class PublicacaoDTO implements Serializable{
     // fazer correcoes nos tipos
     private String texto;
     private String data;
-    private Autor autor;
+    private AutorDTO autor;
 }
