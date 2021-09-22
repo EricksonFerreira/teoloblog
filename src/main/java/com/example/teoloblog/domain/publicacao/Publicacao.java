@@ -37,7 +37,7 @@ public class Publicacao implements Serializable {
     private String texto;
     private String data;
     
-    @OneToMany(mappedBy = "publicacao")
+    @OneToMany(mappedBy = "id.publicacao")
     private Set<EtiquetaPublicacao> etiquetaPublicacao;
 
     @ManyToOne

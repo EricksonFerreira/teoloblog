@@ -19,7 +19,7 @@ import java.util.Set;
 public class Funcao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer codigo;
+    private Integer id;
     private String nome;
 
     @OneToMany(mappedBy = "funcao")

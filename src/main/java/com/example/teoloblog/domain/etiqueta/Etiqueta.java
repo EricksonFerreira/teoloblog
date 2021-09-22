@@ -1,13 +1,10 @@
 package com.example.teoloblog.domain.etiqueta;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.example.teoloblog.domain.etiquetapublicacao.EtiquetaPublicacao;
 import lombok.AllArgsConstructor;
@@ -29,7 +26,7 @@ public class Etiqueta implements Serializable {
     private Integer codigo;
     private String nome;
 
-    @OneToMany(mappedBy = "etiqueta")
-    private Set<EtiquetaPublicacao> etiquetaPublicacao;
+    @OneToMany(mappedBy = "id.etiqueta")
+    private List<EtiquetaPublicacao> etiquetaPublicacao;
 
 }
