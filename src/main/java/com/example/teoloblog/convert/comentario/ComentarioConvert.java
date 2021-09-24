@@ -19,15 +19,8 @@ public class ComentarioConvert {
 		return ComentarioDTO.builder().codigo(domain.getCodigo())
 								 .texto(domain.getTexto())
 								 .data(domain.getData())
-								 .usuario(UsuarioConvert.usuarioDomainToDTO(domain.getUsuario()))
-								 .imagem(domain.getImagem())
+//								 .usuario(UsuarioConvert.usuarioDomainToDTO(domain.getUsuario()))
+//								 .imagem(domain.getImagem())
 								 .build();
-	}
-
-	public static Comentario autorFormToAutorEntity(ComentarioFormDTO autorForm) {
-		return Comentario.builder().nome(autorForm.getNome())
-							  .descricao(autorForm.getDescricao())
-							  .imagem(autorForm.getImagem())
-							  .build();
 	}
 }

@@ -16,7 +16,7 @@ public class FuncaoConvert {
 	}
 
 	public static FuncaoDTO funcaoDomainToDTO(Funcao domain) {
-		return FuncaoDTO.builder().codigo(domain.getCodigo()).nome(domain.getNome()).build();
+		return FuncaoDTO.builder().codigo(domain.getId()).nome(domain.getNome()).build();
 	}
 	
 	public static Funcao funcaoFormToFuncaoEntity(FuncaoFormDTO funcaoForm) {
