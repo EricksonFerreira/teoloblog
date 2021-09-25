@@ -4,6 +4,7 @@ package com.example.teoloblog.convert.usuario;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.teoloblog.convert.funcao.FuncaoConvert;
 import com.example.teoloblog.domain.usuario.Usuario;
 import com.example.teoloblog.dto.usuario.UsuarioDTO;
 import com.example.teoloblog.dto.usuario.UsuarioFormDTO;
@@ -18,11 +19,12 @@ public class UsuarioConvert {
 	}
 
 	public static UsuarioDTO usuarioDomainToDTO(Usuario domain) {
-		return UsuarioDTO.builder().codigo(domain.getCodigo()).nome(domain.getNome()).build();
-	}
-	
-	public static Usuario usuarioFormToUsuarioEntity(UsuarioFormDTO usuarioForm) {
-		return Usuario.builder().nome(usuarioForm.getNome()).build();
+		return UsuarioDTO.builder().codigo(domain.getCodigo())
+									.nome(domain.getNome())
+									.password(domain.getPassword())
+									.username(domain.getUsername())
+									.funcao(FuncaoConvert.funcaoDomainToDTO(domain.getFuncao()))
+									.build();
 	}
 
 }
