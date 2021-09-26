@@ -14,7 +14,7 @@ public class ReferenciaConvert {
 
     }
 
-    public static List<ReferenciaDTO> p(List<Referencia> domainList){
+    public static List<ReferenciaDTO> referenciaDomainListToDTOlist(List<Referencia> domainList){
         return domainList.stream().map(ReferenciaConvert::referenciaDomainToDTO).collect(Collectors.toList());
     }
 
