@@ -16,10 +16,9 @@ public class ComentarioFormDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    private String nome;    
-    private String descricao;    
-    private String imagem;
+    private String texto;
+    private String data;
 
-    private Integer autorId;
-    private Integer PublicacaoId;
+    private Integer usuarioId;
+    private Integer publicacaoId;
 }

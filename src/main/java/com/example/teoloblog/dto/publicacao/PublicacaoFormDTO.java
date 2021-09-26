@@ -24,5 +24,6 @@ public class PublicacaoFormDTO implements Serializable{
 
     // @JsonProperty("autor_id")
     private Integer autorId;
-    
+    private List<Integer> listaEtiquetaId;
+
 }
