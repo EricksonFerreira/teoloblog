@@ -2,30 +2,38 @@ package com.example.teoloblog.service.publicacao;
 
 import com.example.teoloblog.convert.publicacao.PublicacaoConvert;
 import com.example.teoloblog.domain.autor.Autor;
+import com.example.teoloblog.domain.comentario.Comentario;
 import com.example.teoloblog.domain.etiqueta.Etiqueta;
 import com.example.teoloblog.domain.etiquetapublicacao.EtiquetaPublicacao;
 import com.example.teoloblog.domain.etiquetapublicacao.EtiquetaPublicacaoPK;
 import com.example.teoloblog.domain.publicacao.Publicacao;
-import com.example.teoloblog.dto.etiquetapublicacao.EtiquetaPublicacaoDTO;
 import com.example.teoloblog.dto.publicacao.PublicacaoDTO;
 import com.example.teoloblog.dto.publicacao.PublicacaoFormDTO;
 import com.example.teoloblog.repository.autor.AutorRepository;
+import com.example.teoloblog.repository.comentario.ComentarioRepository;
 import com.example.teoloblog.repository.etiqueta.EtiquetaRepository;
+import com.example.teoloblog.repository.etiquetapublicacao.EtiquetaPublicacaoRepository;
 import com.example.teoloblog.repository.publicacao.PublicacaoRepository;
+import com.example.teoloblog.repository.referencia.ReferenciaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
-public class PublicacaoServiceImpl implements PublicacaoService{
+public class PublicacaoServiceImpl implements PublicacaoService {
 
     private final PublicacaoRepository publicacaoRepository;
     private final AutorRepository autorRepository;
     private final EtiquetaRepository etiquetaRepository;
+    private final EtiquetaPublicacaoRepository etiquetaPublicacaoRepository;
+    private final ComentarioRepository comentarioRepository;
+    private final ReferenciaRepository referenciaRepository;
 
     @Override
     public List<PublicacaoDTO> listaPublicacoes() {
@@ -36,7 +44,7 @@ public class PublicacaoServiceImpl implements PublicacaoService{
     @Override
     public PublicacaoDTO buscaPublicacao(Integer codigo) throws Exception {
         Optional<Publicacao> publicacaoOpt = publicacaoRepository.findById(codigo);
-        if(!publicacaoOpt.isPresent()){
+        if (!publicacaoOpt.isPresent()) {
             throw new Exception("Não existe essa publicação!");
         }
 
@@ -47,7 +55,7 @@ public class PublicacaoServiceImpl implements PublicacaoService{
     public PublicacaoDTO adicionaPublicacao(PublicacaoFormDTO publicacaoFormDTO) throws Exception {
 
         Optional<Autor> autorOpt = autorRepository.findById(publicacaoFormDTO.getAutorId());
-        if(autorOpt.isPresent()){
+        if(!autorOpt.isPresent()){
             throw new Exception("Não existe esse autor no sistema");
         }
 
@@ -70,28 +78,66 @@ public class PublicacaoServiceImpl implements PublicacaoService{
                                             .data(publicacaoFormDTO.getData())
                                             .autor(autorOpt.get())
                                             .build();
-        publicacaoRepository.save(publicacao);
+        Publicacao publicacaoSave = publicacaoRepository.save(publicacao);
 
         publicacaoFormDTO.getListaEtiquetaId().stream().forEach(e -> {
             Optional<Etiqueta> etiqueta = etiquetaRepository.findById(e);
-//            EtiquetaPublicacao etiquetaPublicacao = null;
-//                                                                              EtiquetaPublicacaoDTO.builder()
-//                                                                            .etiqueta(etiqueta.get())
-//                                                                            .publicacao(publicacao)
-//                                                                            .build();
-//            etiquetaPublicacaoPkRepository.save(etiquetaPublicacao);
-//            etiquetaPublicacaoRepository.save(EtiquetaPublicacaoConvert.etiquetaPublicacaoDomainToDTO(etiquetaPublicacao));
+            EtiquetaPublicacaoPK etiquetaPublicacaoPk = EtiquetaPublicacaoPK.builder()
+                                                                            .etiqueta(etiqueta.get())
+                                                                            .publicacao(publicacaoSave)
+                                                                            .build();
+            EtiquetaPublicacao etiquetaPublicacao = EtiquetaPublicacao.builder().id(etiquetaPublicacaoPk).build();
+            etiquetaPublicacaoRepository.save(etiquetaPublicacao);
         });
-        return null;
+        return PublicacaoConvert.publicacaoDomainToDTO(publicacao);
     }
 
     @Override
+    @Transactional
     public PublicacaoDTO editaPublicacao(Integer codigo, PublicacaoFormDTO publicacaoFormDTO) throws Exception {
-        return null;
+        Optional<Publicacao> publicacaoOpt = publicacaoRepository.findById(codigo);
+        if(publicacaoOpt.isEmpty()){
+            throw new Exception("Não existe essa publicacao no sistema");
+        }
+
+        Optional<Autor> autorOpt = autorRepository.findById(publicacaoFormDTO.getAutorId());
+        if(!autorOpt.isPresent()){
+            throw new Exception("Não existe esse autor no sistema");
+        }
+
+        Publicacao publicacao = publicacaoOpt.get();
+        publicacao.setTitulo(publicacaoFormDTO.getTitulo());
+        publicacao.setTexto(publicacaoFormDTO.getTexto());
+        publicacao.setData(publicacaoFormDTO.getData());
+        publicacao.setAutor(autorOpt.get());
+        Publicacao publicacaoSave = publicacaoRepository.save(publicacao);
+
+        etiquetaPublicacaoRepository.deleteById_Publicacao(publicacaoSave);
+
+        publicacaoFormDTO.getListaEtiquetaId().stream().forEach(e -> {
+            Optional<Etiqueta> etiqueta = etiquetaRepository.findById(e);
+            EtiquetaPublicacaoPK etiquetaPublicacaoPk = EtiquetaPublicacaoPK.builder()
+                                                                        .etiqueta(etiqueta.get())
+                                                                        .publicacao(publicacao)
+                                                                        .build();
+            EtiquetaPublicacao etiquetaPublicacao = EtiquetaPublicacao.builder().id(etiquetaPublicacaoPk).build();
+            etiquetaPublicacaoRepository.save(etiquetaPublicacao);
+        });
+        return PublicacaoConvert.publicacaoDomainToDTO(publicacaoSave);
     }
 
-    @Override
-    public void deletaPublicacao(Integer codigo) throws Exception {
 
+    @Override
+    @Transactional
+    public void deletaPublicacao(Integer codigo) throws Exception {
+        Optional<Publicacao> publicacaoOpt = publicacaoRepository.findById(codigo);
+        if(publicacaoOpt.isEmpty()){
+            throw new Exception("Não existe essa publicacao no sistema");
+        }
+
+        etiquetaPublicacaoRepository.deleteById_Publicacao(publicacaoOpt.get());
+        comentarioRepository.deleteByPublicacao(publicacaoOpt.get());
+        referenciaRepository.deleteByPublicacao(publicacaoOpt.get());
+        publicacaoRepository.delete(publicacaoOpt.get());
     }
 }

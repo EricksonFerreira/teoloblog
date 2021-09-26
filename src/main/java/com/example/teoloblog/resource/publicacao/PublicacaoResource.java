@@ -5,6 +5,7 @@ import com.example.teoloblog.dto.publicacao.PublicacaoDTO;
 import com.example.teoloblog.dto.publicacao.PublicacaoFormDTO;
 import com.example.teoloblog.service.publicacao.PublicacaoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,8 +29,19 @@ public class PublicacaoResource {
     }
 
     @PostMapping
-    public ResponseEntity<PublicacaoDTO> adicionaUsuario(@RequestBody PublicacaoFormDTO publicacaoFormDTO) throws Exception {
+    public ResponseEntity<PublicacaoDTO> adicionPublicacao(@RequestBody PublicacaoFormDTO publicacaoFormDTO) throws Exception {
         PublicacaoDTO publicacao = publicacaoService.adicionaPublicacao(publicacaoFormDTO);
         return ResponseEntity.ok(publicacao);
+    }
+
+    @PutMapping("/{codigo}")
+    public ResponseEntity<PublicacaoDTO> editaPublicacao(@PathVariable("codigo") Integer codigo,@RequestBody PublicacaoFormDTO publicacaoFormDTO) throws Exception {
+        PublicacaoDTO publicacao = publicacaoService.editaPublicacao(codigo,publicacaoFormDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(publicacao);
+    }
+    @DeleteMapping("/{codigo}")
+    public ResponseEntity<PublicacaoDTO> deletePublicacao(@PathVariable("codigo") Integer codigo) throws Exception {
+        publicacaoService.deletaPublicacao(codigo);
+        return ResponseEntity.ok().build();
     }
 }

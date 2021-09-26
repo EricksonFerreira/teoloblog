@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 public class PublicacaoFormDTO implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    private String nome;
     private String titulo;
     // fazer correcoes nos tipos
     private String texto;

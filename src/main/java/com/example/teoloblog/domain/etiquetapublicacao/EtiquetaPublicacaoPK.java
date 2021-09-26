@@ -3,6 +3,7 @@ package com.example.teoloblog.domain.etiquetapublicacao;
 import com.example.teoloblog.domain.etiqueta.Etiqueta;
 import com.example.teoloblog.domain.publicacao.Publicacao;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
 
 @Embeddable
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class EtiquetaPublicacaoPK implements Serializable {
