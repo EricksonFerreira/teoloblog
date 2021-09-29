@@ -113,7 +113,7 @@ Os autores são as pessoas que escreveram o texto que foi publicado.
             "imagem": frame.svg
           }
 
-### Remover (Delete) [DELETE  /contatos/{codigo}]
+### Remover (Delete) [DELETE  /autor/{codigo}]
 
 + Request (application/json)
 
