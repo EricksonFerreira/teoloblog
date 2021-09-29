@@ -14,6 +14,7 @@ import com.example.teoloblog.domain.autor.Autor;
 import com.example.teoloblog.domain.comentario.Comentario;
 import com.example.teoloblog.domain.etiquetapublicacao.EtiquetaPublicacao;
 
+import com.example.teoloblog.domain.usuario.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,6 +43,9 @@ public class Publicacao implements Serializable {
 
     @ManyToOne
     private Autor autor;
+
+    @ManyToOne
+    private Usuario usuario;
 
     @OneToMany(mappedBy = "publicacao")
     private Set<Comentario> comentario;

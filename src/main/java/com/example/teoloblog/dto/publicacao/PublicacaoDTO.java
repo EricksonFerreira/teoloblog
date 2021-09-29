@@ -6,6 +6,7 @@ import java.util.List;
 import com.example.teoloblog.domain.autor.Autor;
 
 import com.example.teoloblog.dto.autor.AutorDTO;
+import com.example.teoloblog.dto.usuario.UsuarioDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,4 +26,5 @@ public class PublicacaoDTO implements Serializable{
     private String texto;
     private String data;
     private AutorDTO autor;
+    private UsuarioDTO usuario;
 }

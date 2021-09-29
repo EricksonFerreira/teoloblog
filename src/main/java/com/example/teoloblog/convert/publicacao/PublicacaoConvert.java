@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.example.teoloblog.convert.autor.AutorConvert;
+import com.example.teoloblog.convert.usuario.UsuarioConvert;
 import com.example.teoloblog.domain.publicacao.Publicacao;
 import com.example.teoloblog.dto.publicacao.PublicacaoDTO;
 import com.example.teoloblog.dto.publicacao.PublicacaoFormDTO;
@@ -24,6 +25,7 @@ public class PublicacaoConvert {
                                    .texto(domain.getTexto())
                                    .data(domain.getData())
                                    .autor(AutorConvert.autorDomainToDTO(domain.getAutor()))
+                                   .usuario(UsuarioConvert.usuarioDomainToDTO(domain.getUsuario()))
                                    .build();
     }
 

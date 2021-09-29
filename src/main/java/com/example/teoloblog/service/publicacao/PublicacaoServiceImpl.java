@@ -7,6 +7,7 @@ import com.example.teoloblog.domain.etiqueta.Etiqueta;
 import com.example.teoloblog.domain.etiquetapublicacao.EtiquetaPublicacao;
 import com.example.teoloblog.domain.etiquetapublicacao.EtiquetaPublicacaoPK;
 import com.example.teoloblog.domain.publicacao.Publicacao;
+import com.example.teoloblog.domain.usuario.Usuario;
 import com.example.teoloblog.dto.publicacao.PublicacaoDTO;
 import com.example.teoloblog.dto.publicacao.PublicacaoFormDTO;
 import com.example.teoloblog.repository.autor.AutorRepository;
@@ -15,6 +16,7 @@ import com.example.teoloblog.repository.etiqueta.EtiquetaRepository;
 import com.example.teoloblog.repository.etiquetapublicacao.EtiquetaPublicacaoRepository;
 import com.example.teoloblog.repository.publicacao.PublicacaoRepository;
 import com.example.teoloblog.repository.referencia.ReferenciaRepository;
+import com.example.teoloblog.repository.usuario.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,7 @@ public class PublicacaoServiceImpl implements PublicacaoService {
     private final EtiquetaPublicacaoRepository etiquetaPublicacaoRepository;
     private final ComentarioRepository comentarioRepository;
     private final ReferenciaRepository referenciaRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Override
     public List<PublicacaoDTO> listaPublicacoes() {
@@ -54,6 +57,10 @@ public class PublicacaoServiceImpl implements PublicacaoService {
     @Override
     public PublicacaoDTO adicionaPublicacao(PublicacaoFormDTO publicacaoFormDTO) throws Exception {
 
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(publicacaoFormDTO.getUsuarioId());
+        if(!usuarioOpt.isPresent()){
+            throw new Exception("Não existe esse usuario no sistema");
+        }
         Optional<Autor> autorOpt = autorRepository.findById(publicacaoFormDTO.getAutorId());
         if(!autorOpt.isPresent()){
             throw new Exception("Não existe esse autor no sistema");
@@ -77,6 +84,7 @@ public class PublicacaoServiceImpl implements PublicacaoService {
                                             .texto(publicacaoFormDTO.getTexto())
                                             .data(publicacaoFormDTO.getData())
                                             .autor(autorOpt.get())
+                                            .usuario(usuarioOpt.get())
                                             .build();
         Publicacao publicacaoSave = publicacaoRepository.save(publicacao);
 
@@ -95,6 +103,10 @@ public class PublicacaoServiceImpl implements PublicacaoService {
     @Override
     @Transactional
     public PublicacaoDTO editaPublicacao(Integer codigo, PublicacaoFormDTO publicacaoFormDTO) throws Exception {
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(publicacaoFormDTO.getUsuarioId());
+        if(!usuarioOpt.isPresent()){
+            throw new Exception("Não existe esse usuario no sistema");
+        }
         Optional<Publicacao> publicacaoOpt = publicacaoRepository.findById(codigo);
         if(publicacaoOpt.isEmpty()){
             throw new Exception("Não existe essa publicacao no sistema");
@@ -110,6 +122,7 @@ public class PublicacaoServiceImpl implements PublicacaoService {
         publicacao.setTexto(publicacaoFormDTO.getTexto());
         publicacao.setData(publicacaoFormDTO.getData());
         publicacao.setAutor(autorOpt.get());
+        publicacao.setUsuario(usuarioOpt.get());
         Publicacao publicacaoSave = publicacaoRepository.save(publicacao);
 
         etiquetaPublicacaoRepository.deleteById_Publicacao(publicacaoSave);
