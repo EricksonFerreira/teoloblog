@@ -115,7 +115,747 @@ Os autores são as pessoas que escreveram o texto que foi publicado.
 
 ### Remover (Delete) [DELETE  /autor/{codigo}]
 
-+ Request (application/json)
++ Parameters
+    + id (number, required) - codigo do autor
+
++ Response 200 (application/json)
+
+
+# Comentario [/comentario]
+
+Os autores são as pessoas que escreveram o texto que foi publicado.
+
+
+### Listar (List) [GET /comentario/{codigo}]
++ Parameters
+    + id (number, optional) - Filtrar por id do comentario
 
 
 + Response 200 (application/json)
+
+      {
+        "texto": "lorem",
+        "data": "22/12/2020",
+        "usuario_id": 1,
+        "publicacao_id":2
+      }
+         
+### Novo (Create) [POST]
+
++ Attributes (object)
+
+    + texto: texto do comentario(string) - limite 255 caracteres,
+    + data: data da criação do comentario(string) - limite 255 caracteres,
+    + usuario_id: id do usuario que criou o comentario(inteiro) - 11 numeros   
+    + publicacao_id: id da publicacao a quem o comentario se refere(inteiro) - 11 numeros   
+
++ Request (application/json)
+
+    + Body
+
+          {
+            "texto": "lorem",
+            "data": "22/12/2020",
+            "usuario_id": 1,
+            "publicacao_id":2
+          }
+
+
++ Response 200 (application/json)
+
+    + Body
+    
+           {
+              "codigo": 4,
+              "texto": "lorem",
+              "data": "22/12/2020",
+              "usuario": {
+                "codigo": 1,
+                "nome": "ERICKSON",
+                "username": "ERICKSON",
+                "password": "123",
+                "funcao": {
+                  "codigo": 1,
+                  "nome": "ADMINISTRADOR"
+                }
+              },
+              "publicacao": {
+                "codigo": 2,
+                "titulo": "Lorem3",
+                "texto": "Lorem Ipsum3",
+                "data": "10/10/2010",
+                "autor": {
+                  "codigo": 2,
+                  "nome": "lorem",
+                  "descricao": "lorem ipsum",
+                  "imagem": "arminiano.jpg"
+                },
+                "usuario": {
+                  "codigo": 1,
+                  "nome": "ERICKSON",
+                  "username": "ERICKSON",
+                  "password": "123",
+                  "funcao": {
+                    "codigo": 1,
+                    "nome": "ADMINISTRADOR"
+                  }
+                }
+              }
+            }
+
+### Editar (Update) [PUT  /comentario/{codigo}]
+
++ Request (application/json)
+
+    + Body
+
+          {
+            "texto": "lorem",
+            "data": "22/12/2020",
+            "usuario_id": 1,
+            "publicacao_id":2
+          }
+
+
++ Response 200 (application/json)
+  Todos os dados do autor
+ 
+    + Body
+       
+           {
+              "codigo": 4,
+              "texto": "lorem",
+              "data": "22/12/2020",
+              "usuario": {
+                "codigo": 1,
+                "nome": "ERICKSON",
+                "username": "ERICKSON",
+                "password": "123",
+                "funcao": {
+                  "codigo": 1,
+                  "nome": "ADMINISTRADOR"
+                }
+              },
+              "publicacao": {
+                "codigo": 2,
+                "titulo": "Lorem3",
+                "texto": "Lorem Ipsum3",
+                "data": "10/10/2010",
+                "autor": {
+                  "codigo": 2,
+                  "nome": "lorem",
+                  "descricao": "lorem ipsum",
+                  "imagem": "arminiano.jpg"
+                },
+                "usuario": {
+                  "codigo": 1,
+                  "nome": "ERICKSON",
+                  "username": "ERICKSON",
+                  "password": "123",
+                  "funcao": {
+                    "codigo": 1,
+                    "nome": "ADMINISTRADOR"
+                  }
+                }
+              }
+            }
+
+### Remover (Delete) [DELETE  /comentario/{codigo}]
++ Parameters
+    + id (number, required) - codigo do comentario
+
++ Response 200 (application/json)
+
+
+# Etiqueta [/etiqueta]
+
+As etiquetas são pequenos rótulos das publicações.
+
+
+### Listar (List) [GET /etiqueta/{codigo}]
++ Parameters
+    + codigo (number, optional) - Filtrar pelo codigo do etiqueta
+
+
++ Response 200 (application/json)
+
+      [
+        {
+          "codigo": 1,
+          "nome": "Ateísmo"
+        },
+        {
+          "codigo": 2,
+          "nome": "Criacionismo"
+        }
+      ]
+### Novo (Create) [POST]
+
++ Attributes (object)
+
+    + nome: nome da etiqueta(string) - limite 255 caracteres
+
++ Request (application/json)
+
+    + Body
+     
+          {
+            "nome": "calvinismo"
+          }
+
++ Response 200 (application/json)
+
+    + Body
+    
+          {
+            "codigo": 3,
+            "nome": "calvinismo"
+          }
+
+### Editar (Update) [PUT  /etiqueta/{codigo}]
+
++ Request (application/json)
+
+    + Body
+
+          {
+            "nome": "arminianismo"
+          }
+
+
++ Response 200 (application/json)
+  Todos os dados da etiqueta
+ 
+    + Body
+       
+          {
+            "codigo": 2,
+            "nome": "arminianismo"
+          }
+
+### Remover (Delete) [DELETE  /etiqueta/{codigo}]
++ Parameters
+    + codigo (number, required) - codigo do etiqueta
+
++ Response 200 (application/json)
+
+
+# Função [/funcao]
+
+As função são as permissões que os usários terão.
+
+
+### Listar (List) [GET /etiqueta/{codigo}]
++ Parameters
+    + codigo (number, optional) - Filtrar pelo codigo do funcao
+
+
++ Response 200 (application/json)
+
+      [
+        {
+          "codigo": 1,
+          "nome": "ADMINISTRADOR"
+        },
+        {
+          "codigo": 2,
+          "nome": "GERENTE"
+        },
+        {
+          "codigo": 3,
+          "nome": "NORMAL"
+        }
+      ]
+### Novo (Create) [POST]
+
++ Attributes (object)
+
+    + nome: nome da funcao(string) - limite 255 caracteres
+
++ Request (application/json)
+
+    + Body
+     
+          {
+            "nome": "lorem"
+          }
+
+
++ Response 200 (application/json)
+
+    + Body
+    
+          {
+            "codigo": 4,
+            "nome": "lorem"
+          }
+
+### Editar (Update) [PUT  /funcao/{codigo}]
+
++ Request (application/json)
+
+    + Body
+
+          {
+            "nome": "lorem ipsum"
+          }
+
+
++ Response 200 (application/json)
+  Todos os dados da funcao
+ 
+    + Body
+       
+          {
+            "codigo": 2,
+            "nome": "lorem ipsum"
+          }
+
+### Remover (Delete) [DELETE  /funcao/{codigo}]
++ Parameters
+    + codigo (number, required) - codigo do funcao
+
++ Response 200 (application/json)
+
+
+# Publicacao [/publicacao]
+
+Os publicacaos do sistema.
+
+
+### Listar (List) [GET /publicacao/{codigo}]
++ Parameters
+    + codigo (number, optional) - Filtrar por codigo do publicacao
+
+
++ Response 200 (application/json)
+  
+      [
+        {
+          "codigo": 1,
+          "titulo": "Lorem4",
+          "texto": "Lorem Ipsum4",
+          "data": "10/10/2010",
+          "autor": {
+            "codigo": 1,
+            "nome": "Calvino",
+            "descricao": "Teólogo calvinista",
+            "imagem": "calvino.svg"
+          },
+          "usuario": {
+            "codigo": 1,
+            "nome": "erickson",
+            "username": "erickson",
+            "password": "123",
+            "funcao": {
+              "codigo": 2,
+              "nome": "GERENTE"
+            }
+          }
+        },
+        {
+          "codigo": 2,
+          "titulo": "Lorem3",
+          "texto": "Lorem Ipsum3",
+          "data": "10/10/2010",
+          "autor": {
+            "codigo": 2,
+            "nome": "Arminio",
+            "descricao": "Teólogo arminiano",
+            "imagem": "arminio.svg"
+          },
+          "usuario": {
+            "codigo": 1,
+            "nome": "erickson",
+            "username": "erickson",
+            "password": "123",
+            "funcao": {
+              "codigo": 2,
+              "nome": "GERENTE"
+            }
+          }
+        }
+      ]
+### Novo (Create) [POST]
+
++ Attributes (object)
+
+    + titulo: titulo da publicacao(string) - limite 255 caracteres,
+    + texto: texto da publicacao(string) - limite 255 caracteres,
+    + data: data que a publicacao foi feita(string) - limite 255 caracteres,
+    + lita_etiqueta_id: id das etiquetas que fazer referencia a publicacao(array de inteiros) 
+    + autor_id: id do autor da publicacao(inteiro) - 11 numeros   
+    + usuario_id: id do usuario que fez a publicacao(inteiro) - 11 numeros   
+
++ Request (application/json)
+
+    + Body
+
+          {
+            "titulo": "Lorem ipsum",
+            "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula volutpat hendrerit. Aliquam interdum eget leo vitae pellentesque. Aliquam lacinia nisi et rutrum euismod. Nam malesuada consequat urna id finibus.",
+            "data": "16/09/2021",
+            "lista_etiqueta_id":[1,2],
+            "autor_id":1,
+            "usuario_id":1
+          }
+
++ Response 200 (application/json)
+
+    + Body
+    
+          {
+            "codigo": 3,
+            "titulo": "Lorem ipsum",
+            "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula volutpat hendrerit. Aliquam interdum eget leo vitae pellentesque. Aliquam lacinia nisi et rutrum euismod. Nam malesuada consequat urna id finibus.",
+            "data": "16/09/2021",
+            "autor": {
+              "codigo": 1,
+              "nome": "Calvino",
+              "descricao": "Teólogo calvinista",
+              "imagem": "calvino.svg"
+            },
+            "usuario": {
+              "codigo": 1,
+              "nome": "ERICKSON",
+              "username": "ERICKSON",
+              "password": "123",
+              "funcao": {
+                "codigo": 1,
+                "nome": "ADMINISTRADOR"
+              }
+            }
+          }
+
+### Editar (Update) [PUT  /publicacao/{codigo}]
+
++ Request (application/json)
+
+    + Body
+
+          {
+            "titulo": "Lorem ipsum",
+            "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula volutpat hendrerit. Aliquam interdum eget leo vitae pellentesque. Aliquam lacinia nisi et rutrum euismod. Nam malesuada consequat urna id finibus.",
+            "data": "16/09/2021",
+            "lista_etiqueta_id":[],
+            "autor_id":1
+          }
+
++ Response 200 (application/json)
+  Todos os dados da publicacao
+ 
+    + Body
+       
+          {
+            "codigo": 1,
+            "titulo": "Lorem ipsum",
+            "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula volutpat hendrerit. Aliquam interdum eget leo vitae pellentesque. Aliquam lacinia nisi et rutrum euismod. Nam malesuada consequat urna id finibus.",
+            "data": "16/09/2021",
+            "autor": {
+              "codigo": 1,
+              "nome": "Calvino",
+              "descricao": "Teólogo calvinista",
+              "imagem": "calvino.svg"
+            },
+            "usuario": {
+              "codigo": 2,
+              "nome": "ERINSTON",
+              "username": "ERINSTON",
+              "password": "456",
+              "funcao": {
+                "codigo": 2,
+                "nome": "GERENTE"
+              }
+            }
+          }
+### Remover (Delete) [DELETE  /publicacao/{codigo}]
++ Parameters
+    + id (number, required) - id do publicacao
+
++ Response 200 (application/json)
+
+
+# Referencia [/referencia]
+
+As referencias são referencias utilizadas para fazer a publicação.
+
+
+### Listar (List) [GET /referencia/{codigo}]
++ Parameters
+    + id (number, optional) - Filtrar por id do referencia
+
+
++ Response 200 (application/json)
+
+      [
+        {
+          "codigo": 1,
+          "texto": "Lorem4",
+          "publicacao": {
+            "codigo": 1,
+            "titulo": "Lorem4",
+            "texto": "Lorem Ipsum4",
+            "data": "10/10/2010",
+            "autor": {
+              "codigo": 1,
+              "nome": "Calvino",
+              "descricao": "Teólogo calvinista",
+              "imagem": "calvino.svg"
+            },
+            "usuario": {
+              "codigo": 1,
+              "nome": "ERICKSON",
+              "username": "ERICKSON",
+              "password": "123",
+              "funcao": {
+                "codigo": 1,
+                "nome": "ADMINISTRADOR"
+              }
+            }
+          }
+        },
+        {
+          "codigo": 2,
+          "texto": "Lorem3",
+          "publicacao": {
+            "codigo": 2,
+            "titulo": "Lorem3",
+            "texto": "Lorem Ipsum3",
+            "data": "10/10/2010",
+            "autor": {
+              "codigo": 2,
+              "nome": "lorem",
+              "descricao": "lorem ipsum",
+              "imagem": "arminiano.jpg"
+            },
+            "usuario": {
+              "codigo": 1,
+              "nome": "ERICKSON",
+              "username": "ERICKSON",
+              "password": "123",
+              "funcao": {
+                "codigo": 1,
+                "nome": "ADMINISTRADOR"
+              }
+            }
+          }
+        }
+      ]
+              
+### Novo (Create) [POST]
+
++ Attributes (object)
+
+    + nome: informacoes da referencia(string) - limite 255 caracteres,
+    + texto: texto utiliado na referencia(string) - limite 255 caracteres,
+    + publicacao_id: id da publicacao a quem a referencia se refere(inteiro) - 11 numeros   
+
++ Request (application/json)
+
+    + Body
+
+          {
+            "nome": "Lorem ipsum dolor sit amet",
+            "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula volutpat hendrerit. Aliquam interdum eget leo vitae pellentesque. Aliquam lacinia nisi et rutrum euismod. Nam malesuada consequat urna id finibus.",
+            "publicacao_id":1
+          }
+
+
++ Response 200 (application/json)
+
+    + Body
+    
+           {
+              "codigo": 3,
+              "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula volutpat hendrerit. Aliquam interdum eget leo vitae pellentesque. Aliquam lacinia nisi et rutrum euismod. Nam malesuada consequat urna id finibus.",
+              "publicacao": {
+                "codigo": 3,
+                "titulo": "Lorem ipsum",
+                "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula volutpat hendrerit. Aliquam interdum eget leo vitae pellentesque. Aliquam lacinia nisi et rutrum euismod. Nam malesuada consequat urna id finibus.",
+                "data": "16/09/2021",
+                "autor": {
+                  "codigo": 1,
+                  "nome": "Calvino",
+                  "descricao": "Teólogo calvinista",
+                  "imagem": "calvino.svg"
+                },
+                "usuario": {
+                  "codigo": 1,
+                  "nome": "ERICKSON",
+                  "username": "ERICKSON",
+                  "password": "123",
+                  "funcao": {
+                    "codigo": 1,
+                    "nome": "ADMINISTRADOR"
+                  }
+                }
+              }
+            }
+
+### Editar (Update) [PUT  /referencia/{codigo}]
+
++ Request (application/json)
+
+    + Body
+
+          {
+            "nome": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula volutpat hendrerit. Aliquam interdum eget leo vitae pellentesque. Aliquam lacinia nisi et rutrum euismod. Nam malesuada consequat urna id finibus.",
+            "publicacao_id":2
+          }
+
++ Response 200 (application/json)
+  Todos os dados do autor
+ 
+    + Body
+       
+            {
+                "codigo": 1,
+                "texto": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula volutpat hendrerit. Aliquam interdum eget leo vitae pellentesque. Aliquam lacinia nisi et rutrum euismod. Nam malesuada consequat urna id finibus.",
+                "publicacao": {
+                  "codigo": 2,
+                  "titulo": "Lorem3",
+                  "texto": "Lorem Ipsum3",
+                  "data": "10/10/2010",
+                  "autor": {
+                    "codigo": 2,
+                    "nome": "lorem",
+                    "descricao": "lorem ipsum",
+                    "imagem": "arminiano.jpg"
+                  },
+                  "usuario": {
+                    "codigo": 1,
+                    "nome": "ERICKSON",
+                    "username": "ERICKSON",
+                    "password": "123",
+                    "funcao": {
+                      "codigo": 1,
+                      "nome": "ADMINISTRADOR"
+                    }
+                  }
+                }
+              }
+
+### Remover (Delete) [DELETE  /referencia/{codigo}]
++ Parameters
+    + id (number, required) - codigo da referencia
+
++ Response 200 (application/json)
+
+
+# Usuario [/usuario]
+
+Os usuarios do sistema.
+
+
+### Listar (List) [GET /usuario/{codigo}]
++ Parameters
+    + codigo (number, optional) - Filtrar por codigo do usuario
+
+
++ Response 200 (application/json)
+  
+      [
+          {
+            "codigo": 1,
+            "nome": "ERICKSON",
+            "username": "ERICKSON",
+            "password": "123",
+            "funcao": {
+              "codigo": 1,
+              "nome": "ADMINISTRADOR"
+            }
+          },
+          {
+            "codigo": 2,
+            "nome": "ERINSTON",
+            "username": "ERINSTON",
+            "password": "456",
+            "funcao": {
+              "codigo": 2,
+              "nome": "GERENTE"
+            }
+          },
+          {
+            "codigo": 3,
+            "nome": "LUIGI",
+            "username": "LUIGI",
+            "password": "789",
+            "funcao": {
+              "codigo": 3,
+              "nome": "NORMAL"
+            }
+          }
+        ]
+### Novo (Create) [POST]
+
++ Attributes (object)
+
+    + nome: nome do usuario(string) - limite 255 caracteres,
+    + username: nome que será utilizado no login(string) - limite 255 caracteres,
+    + password: senha que será utilizado no login(string) - limite 255 caracteres,
+    + funcao_id: id da funcao do usuario(inteiro) - 11 numeros   
+
++ Request (application/json)
+
+    + Body
+
+          {
+            "nome": "erickson",
+            "username":"erickson",
+            "password":"123",
+            "funcao_id":1
+          }
+
++ Response 200 (application/json)
+
+    + Body
+    
+          {
+            "codigo": 4,
+            "nome": "erickson",
+            "username": "erickson",
+            "password": "123",
+            "funcao": {
+              "codigo": 1,
+              "nome": "ADMINISTRADOR"
+            }
+          }
+
+### Editar (Update) [PUT  /usuario/{codigo}]
+
++ Request (application/json)
+
+    + Body
+
+          {
+            "nome": "erickson",
+            "username":"erickson",
+            "password":"123",
+            "funcao_id":2
+          }
+
++ Response 200 (application/json)
+  Todos os dados do usuario
+ 
+    + Body
+       
+          {
+            {
+              "codigo": 1,
+              "nome": "erickson",
+              "username": "erickson",
+              "password": "123",
+              "funcao": {
+                "codigo": 2,
+                "nome": "GERENTE"
+            }
+          }
+
+### Remover (Delete) [DELETE  /usuario/{codigo}]
++ Parameters
+    + id (number, required) - id do usuario
+
++ Response 200 (application/json)
+
+
