@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class UsuarioServiceImpl implements UsuarioService{
-
+    //private PasswordEncoder encoder;
     public final UsuarioRepository usuarioRepository;
     public final FuncaoRepository funcaoRepository;
 
@@ -46,6 +46,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
         Usuario entity = Usuario.builder()
                                 .nome(usuarioFormDTO.getNome())
+      //                          .password(encoder.encode(usuarioFormDTO.getPassword()))
                                 .password(usuarioFormDTO.getPassword())
                                 .username(usuarioFormDTO.getUsername())
                                 .funcao(funcaoOpt.get())

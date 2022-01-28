@@ -1,6 +1,7 @@
 package com.example.teoloblog.domain.usuario;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -34,5 +35,4 @@ public class Usuario implements Serializable {
     @ManyToOne
     private Funcao funcao;
 
-    
 }
