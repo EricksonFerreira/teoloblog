@@ -8,6 +8,7 @@ As dúvidas e solicitações, relacionadas ao acesso da API, devem ser enviadas 
 
 Recursos disponíveis para acesso via API:
 
+- [**Login**](#login)
 - [**Autor**](#autor)
 - [**Etiqueta**](#etiqueta)
 - [**Comentario**](#comentario)
